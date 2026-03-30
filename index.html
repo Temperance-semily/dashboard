@@ -39,8 +39,9 @@
   .bar-track{flex:1;height:20px;background:#2d3149;border-radius:4px;overflow:hidden}
   .bar-fill{height:100%;border-radius:4px}
   .bar-val{width:40px;text-align:right;font-weight:600}
-  .charts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
-  .chart-card{background:#1a1d27;border-radius:12px;padding:20px;min-height:300px}
+  .charts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;align-items:start}
+  .chart-card{background:#1a1d27;border-radius:12px;padding:20px;min-height:300px;height:320px;box-sizing:border-box;overflow:hidden}
+  #producerOverdueCard{height:auto;min-height:300px;max-height:400px}
   @media(max-width:600px){
     .kpi-val{font-size:28px}
     header h1{font-size:16px}
@@ -50,7 +51,7 @@
 <body>
 <header>
   <h1>SEMILY | <span>ЗАКУПКИ</span></h1>
-  <div class="updated">Обновлено: 30.03.2026 12:01 &nbsp;|&nbsp; 📅 Неделя 14</div>
+  <div class="updated">Обновлено: 30.03.2026 12:05 &nbsp;|&nbsp; 📅 Неделя 14</div>
 </header>
 <main>
 
