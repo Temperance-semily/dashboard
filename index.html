@@ -11,7 +11,7 @@
   header h1{font-size:20px;font-weight:700;color:#fff;letter-spacing:.5px}
   header h1 span{color:#6366f1}
   .updated{font-size:12px;opacity:.5}
-  main{max-width:1200px;margin:0 auto;padding:24px 16px}
+  main{max-width:1280px;margin:0 auto;padding:24px 16px}
   .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:24px}
   .kpi-card{background:#1a1d27;border-radius:12px;padding:20px;text-align:center;border:1px solid #2d3149}
   .kpi-val{font-size:36px;font-weight:700;color:#6366f1}
@@ -26,15 +26,15 @@
   td{padding:8px;border-bottom:1px solid #1f2233;font-size:13px}
   tr:last-child td{border-bottom:none}
   tr:hover td{background:#1f2233}
-  .mgr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  .mgr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
   .mgr-card{background:#0f1117;border-radius:8px;padding:14px;border:1px solid #2d3149}
   .mgr-name{font-weight:600;margin-bottom:6px}
   .mgr-stats{font-size:12px;opacity:.7;margin-bottom:8px}
   .progress-bar{height:6px;background:#2d3149;border-radius:3px}
-  .progress-fill{height:100%;background:#6366f1;border-radius:3px;transition:width .3s}
+  .progress-fill{height:100%;background:#6366f1;border-radius:3px}
   .chart{display:flex;flex-direction:column;gap:12px}
   .bar-row{display:flex;align-items:center;gap:12px}
-  .bar-label{width:100px;font-size:13px;opacity:.7;flex-shrink:0}
+  .bar-label{width:110px;font-size:13px;opacity:.7;flex-shrink:0}
   .bar-track{flex:1;height:20px;background:#2d3149;border-radius:4px;overflow:hidden}
   .bar-fill{height:100%;border-radius:4px}
   .bar-val{width:40px;text-align:right;font-weight:600}
@@ -47,39 +47,43 @@
 <body>
 <header>
   <h1>SEMILY | <span>ЗАКУПКИ</span></h1>
-  <div class="updated">Обновлено: 30.03.2026 11:04</div>
+  <div class="updated">Обновлено: 30.03.2026 11:14</div>
 </header>
 <main>
 
     <div class="kpi-grid">
       <div class="kpi-card">
         <div class="kpi-val">233</div>
-        <div class="kpi-label">Строк в работе</div>
+        <div class="kpi-label">Строк в работе (без ФФ)</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-val" style="color:#f59e0b">46</div>
         <div class="kpi-label">Неподписанных спецификаций</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-val" style="color:#ef4444">23</div>
-        <div class="kpi-label">Просрочек</div>
+        <div class="kpi-val" style="color:#ef4444">22</div>
+        <div class="kpi-label">Просрочек по срокам</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-val" style="color:#ef4444">15</div>
         <div class="kpi-label">Критических &gt;31д</div>
       </div>
+      <div class="kpi-card">
+        <div class="kpi-val" style="color:#a5b4fc">77</div>
+        <div class="kpi-label">SKU в дефиците</div>
+      </div>
     </div>
 
     <div class="section">
-      <h2>🚨 Требует внимания</h2>
-      <div class="risk-block"><div class='risk-item'>⚠️ <b>Горячее обертывание для тела HOT SPA WRA…</b> · Semily WrapHot · ИМПЕРИАЛ · <span style='color:#f59e0b'>Боцкалева Анна</span></div><div class='risk-item'>⚠️ <b>Парфюмированный крем для тела PARFUME BO…</b> · Semily CreamBodyBaccarat · ИМПЕРИАЛ · <span style='color:#f59e0b'>Боцкалева Анна</span></div><div class='risk-item'>⚠️ <b>Крем для тела SEMILY парфюмированный PAR…</b> · Semily CreamBodyBois · ИМПЕРИАЛ · <span style='color:#f59e0b'>Боцкалева Анна</span></div></div>
+      <h2>⚠️ Требует внимания — Топ-3 риск-спецификации</h2>
+      <div class="risk-block"><div class='risk-item'>⚠️ <b>Горячее обертывание для тела HOT SPA WRAP VERY-VER…</b> · Semily WrapHot · ИМПЕРИАЛ · <span style='color:#f59e0b'>Боцкалева Анна</span></div><div class='risk-item'>⚠️ <b>Парфюмированный крем для тела PARFUME BODY CREAM C…</b> · Semily CreamBodyBaccarat · ИМПЕРИАЛ · <span style='color:#f59e0b'>Боцкалева Анна</span></div><div class='risk-item'>⚠️ <b>Крем для тела SEMILY парфюмированный PARFUME BODY …</b> · Semily CreamBodyBois · ИМПЕРИАЛ · <span style='color:#f59e0b'>Боцкалева Анна</span></div></div>
     </div>
 
     <div class="section">
-      <h2>📋 Просрочки по дате спецификации</h2>
+      <h2>🔴 Проблемы со сроками — Просрочка по дате спецификации</h2>
       <div class="table-wrap">
       <table>
-        <thead><tr><th>Артикул</th><th>Производитель</th><th>Менеджер</th><th>Статус</th><th>Дней просрочки</th><th>Сумма</th></tr></thead>
+        <thead><tr><th>Артикул</th><th>Производитель</th><th>Менеджер</th><th>Статус</th><th>Просрочено на</th><th>Сумма</th></tr></thead>
         <tbody><tr>
           <td>SM102030125</td>
           <td>АЛЬЯНС ООО</td>
@@ -234,14 +238,17 @@
           <td>Спецификация подписана</td>
           <td style="color:#22c55e;font-weight:700">2</td>
           <td>55 818 ₽</td>
-        </tr><tr>
-          <td>ИТОГО</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td style="color:#22c55e;font-weight:700">0</td>
-          <td>10 698 732 ₽</td>
         </tr></tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>📋 Просрочки по реестру спецификаций</h2>
+      <div class="table-wrap">
+      <table>
+        <thead><tr><th>Артикул</th><th>Производитель</th><th>Название</th><th>Дней просрочки</th><th>Статус</th></tr></thead>
+        <tbody><tr><td colspan="5" style="text-align:center;opacity:.5">Нет данных</td></tr></tbody>
       </table>
       </div>
     </div>
@@ -250,29 +257,29 @@
       <h2>👤 Нагрузка по менеджерам</h2>
       <div class="mgr-grid">
         <div class="mgr-card">
-          <div class="mgr-name">Пасютина Ирина</div>
-          <div class="mgr-stats">Просрочек: <b style="color:#ef4444">15</b> · Неподписанных: <b style="color:#f59e0b">1</b></div>
+          <div class="mgr-name">Белова Анастасия</div>
+          <div class="mgr-stats">Позиций в работе: <b style="color:#6366f1">129</b> · Объём: <b style="color:#a5b4fc">1284560 шт</b> · Просрочек: <b style="color:#ef4444">3</b></div>
           <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
         </div>
         <div class="mgr-card">
           <div class="mgr-name">Боцкалева Анна</div>
-          <div class="mgr-stats">Просрочек: <b style="color:#ef4444">4</b> · Неподписанных: <b style="color:#f59e0b">5</b></div>
-          <div class="progress-bar"><div class="progress-fill" style="width:56%"></div></div>
+          <div class="mgr-stats">Позиций в работе: <b style="color:#6366f1">70</b> · Объём: <b style="color:#a5b4fc">541865 шт</b> · Просрочек: <b style="color:#ef4444">4</b></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:42%"></div></div>
         </div>
         <div class="mgr-card">
-          <div class="mgr-name">Белова Анастасия</div>
-          <div class="mgr-stats">Просрочек: <b style="color:#ef4444">3</b> · Неподписанных: <b style="color:#f59e0b">1</b></div>
-          <div class="progress-bar"><div class="progress-fill" style="width:25%"></div></div>
+          <div class="mgr-name">Пасютина Ирина</div>
+          <div class="mgr-stats">Позиций в работе: <b style="color:#6366f1">34</b> · Объём: <b style="color:#a5b4fc">443502 шт</b> · Просрочек: <b style="color:#ef4444">15</b></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:34%"></div></div>
         </div>
         <div class="mgr-card">
-          <div class="mgr-name">—</div>
-          <div class="mgr-stats">Просрочек: <b style="color:#ef4444">0</b> · Неподписанных: <b style="color:#f59e0b">3</b></div>
-          <div class="progress-bar"><div class="progress-fill" style="width:18%"></div></div>
+          <div class="mgr-name">Проверить</div>
+          <div class="mgr-stats">Позиций в работе: <b style="color:#6366f1">1</b> · Объём: <b style="color:#a5b4fc">16301 шт</b> · Просрочек: <b style="color:#ef4444">0</b></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:1%"></div></div>
         </div></div>
     </div>
 
     <div class="section">
-      <h2>📊 Диаграмма по срокам (неподписанные)</h2>
+      <h2>📊 Неподписанные по срокам</h2>
       <div class="chart">
         <div class="bar-row"><span class="bar-label">5–15 дней</span>
           <div class="bar-track"><div class="bar-fill" style="width:100%;background:#f59e0b"></div></div>
@@ -290,7 +297,7 @@
     </div>
 
     <div class="section">
-      <h2>🏭 Топ-5 производителей по просрочкам</h2>
+      <h2>🏭 Топ-5 производителей по неподписанным</h2>
       <div class="table-wrap">
       <table>
         <thead><tr><th>Производитель</th><th>Кол-во</th></tr></thead>
@@ -300,63 +307,235 @@
     </div>
 
     <div class="section">
-      <h2>⚡ Низкая оборачиваемость (&lt;30 дней)</h2>
+      <h2>📦 Приход на этой неделе <span style="font-size:13px;opacity:.6;font-weight:400">· 1732219097728 шт</span></h2>
       <div class="table-wrap">
       <table>
-        <thead><tr><th>Артикул</th><th>Название</th><th>Менеджер</th><th>Остатки ВБ</th><th>Темп/день</th><th>Дней запаса</th></tr></thead>
+        <thead><tr><th>Артикул</th><th>Менеджер</th><th>Дата прихода</th><th>Кол-во</th><th>Статус</th></tr></thead>
         <tbody><tr>
-          <td>Semily Gel men 3v1L Ocean</td>
-          <td>Шампунь-гель для душа SEMILY 3…</td>
-          <td>Яна Т</td>
-          <td>0</td>
-          <td>28.0</td>
-          <td style="color:#ef4444;font-weight:700">0.0</td>
+          <td>maslo500mlcoconut</td>
+          <td>Боцкалева Анна</td>
+          <td>30.03.2026</td>
+          <td>25 000</td>
+          <td>Спецификация подписана</td>
         </tr><tr>
-          <td>SM102030124</td>
-          <td>Гель для душа SEMILY парфюмиро…</td>
-          <td></td>
-          <td>0</td>
-          <td>8.0</td>
-          <td style="color:#ef4444;font-weight:700">0.0</td>
+          <td>peeling</td>
+          <td>Белова Анастасия</td>
+          <td>30.03.2026</td>
+          <td>15 399</td>
+          <td>На доставку</td>
+        </tr><tr>
+          <td>SM105100083</td>
+          <td>Боцкалева Анна</td>
+          <td>30.03.2026</td>
+          <td>3 000</td>
+          <td>Спецификация подписана</td>
+        </tr><tr>
+          <td>SM102030111</td>
+          <td>Белова Анастасия</td>
+          <td>31.03.2026</td>
+          <td>6 000</td>
+          <td>Спецификация подписана</td>
+        </tr><tr>
+          <td>SM121120006</td>
+          <td>Белова Анастасия</td>
+          <td>31.03.2026</td>
+          <td>5 000</td>
+          <td>План размещения</td>
+        </tr><tr>
+          <td>SM121030162</td>
+          <td>Белова Анастасия</td>
+          <td>31.03.2026</td>
+          <td>57</td>
+          <td>На линии</td>
+        </tr><tr>
+          <td>SM122040054</td>
+          <td>Белова Анастасия</td>
+          <td>31.03.2026</td>
+          <td>70 002</td>
+          <td>Спецификация подписана</td>
+        </tr><tr>
+          <td>SM121040095</td>
+          <td>Боцкалева Анна</td>
+          <td>31.03.2026</td>
+          <td>3 000</td>
+          <td>На линии</td>
+        </tr><tr>
+          <td>Semily CurlyShampoo</td>
+          <td>Боцкалева Анна</td>
+          <td>02.04.2026</td>
+          <td>16 900</td>
+          <td>Спецификация подписана</td>
+        </tr><tr>
+          <td>Semily CurlyMaska</td>
+          <td>Боцкалева Анна</td>
+          <td>02.04.2026</td>
+          <td>6 000</td>
+          <td>Спецификация подписана</td>
         </tr><tr>
           <td>maslo500mlgrap</td>
-          <td>Масло для массажа тела SEMILY …</td>
-          <td>Яна Т</td>
-          <td>0</td>
-          <td>8.0</td>
-          <td style="color:#ef4444;font-weight:700">0.0</td>
+          <td>Боцкалева Анна</td>
+          <td>03.04.2026</td>
+          <td>7 763</td>
+          <td>Спецификация</td>
         </tr><tr>
-          <td>maslo3000ml</td>
-          <td>Масло для массажа тела SEMILY …</td>
-          <td>Яна Т</td>
-          <td>0</td>
-          <td>10.0</td>
-          <td style="color:#ef4444;font-weight:700">0.0</td>
+          <td>Semily CurlyBalm</td>
+          <td>Боцкалева Анна</td>
+          <td>03.04.2026</td>
+          <td>5 800</td>
+          <td>План размещения</td>
         </tr><tr>
+          <td>SM101040076</td>
+          <td>Пасютина Ирина</td>
+          <td>03.04.2026</td>
+          <td>6 000</td>
+          <td>На линии</td>
+        </tr><tr>
+          <td>Semily CreamBodyBois</td>
+          <td>Боцкалева Анна</td>
+          <td>04.04.2026</td>
+          <td>3 300</td>
+          <td>Спецификация подписана</td>
+        </tr></tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>📦 Приход следующей недели <span style="font-size:13px;opacity:.6;font-weight:400">· 1626148660779 шт · 8 660 779 ₽ руб</span></h2>
+      <div class="table-wrap">
+      <table>
+        <thead><tr><th>Артикул</th><th>Менеджер</th><th>Дата прихода</th><th>Кол-во</th><th>Статус</th></tr></thead>
+        <tbody><tr>
+          <td>SM137030085</td>
+          <td>Боцкалева Анна</td>
+          <td>80 ₽</td>
+          <td>5 000</td>
+          <td>06.04.2026</td>
+        </tr><tr>
+          <td>SM105060110</td>
+          <td>Боцкалева Анна</td>
+          <td>51 ₽</td>
+          <td>5 600</td>
+          <td>06.04.2026</td>
+        </tr><tr>
+          <td>SM121040010</td>
+          <td>Боцкалева Анна</td>
+          <td>⚠ нет</td>
+          <td>6 260</td>
+          <td>06.04.2026</td>
+        </tr><tr>
+          <td>SM121040010</td>
+          <td>Боцкалева Анна</td>
+          <td>⚠ нет</td>
+          <td>7 300</td>
+          <td>06.04.2026</td>
+        </tr><tr>
+          <td>SM108030123</td>
+          <td>Боцкалева Анна</td>
+          <td>88 ₽</td>
+          <td>6 000</td>
+          <td>08.04.2026</td>
+        </tr><tr>
+          <td>geldlyabrovei</td>
+          <td>Белова Анастасия</td>
+          <td>23 ₽</td>
+          <td>14 772</td>
+          <td>08.04.2026</td>
+        </tr><tr>
+          <td>SM136030072</td>
+          <td>Боцкалева Анна</td>
+          <td>53 ₽</td>
+          <td>2 500</td>
+          <td>08.04.2026</td>
+        </tr><tr>
+          <td>maslo500mlcoconut</td>
+          <td>Боцкалева Анна</td>
+          <td>119 ₽</td>
+          <td>13 500</td>
+          <td>09.04.2026</td>
+        </tr><tr>
+          <td>maskakeratin</td>
+          <td>Белова Анастасия</td>
+          <td>67 ₽</td>
+          <td>30 000</td>
+          <td>10.04.2026</td>
+        </tr><tr>
+          <td>SM105020003</td>
+          <td>Белова Анастасия</td>
+          <td>126 ₽</td>
+          <td>10 000</td>
+          <td>10.04.2026</td>
+        </tr><tr>
+          <td>Balmantiyell</td>
+          <td>Белова Анастасия</td>
+          <td>69 ₽</td>
+          <td>11 682</td>
+          <td>10.04.2026</td>
+        </tr><tr>
+          <td>sivorotcamorshin</td>
+          <td>Боцкалева Анна</td>
+          <td>33 ₽</td>
+          <td>10 000</td>
+          <td>10.04.2026</td>
+        </tr><tr>
+          <td>Semily CreamBodyBaccarat</td>
+          <td>Боцкалева Анна</td>
+          <td>54 ₽</td>
+          <td>5 500</td>
+          <td>10.04.2026</td>
+        </tr><tr>
+          <td>SM105020109</td>
+          <td>Белова Анастасия</td>
+          <td>38 ₽</td>
+          <td>5 500</td>
+          <td>10.04.2026</td>
+        </tr><tr>
+          <td>SEMILY LipMaskCoconut</td>
+          <td>Боцкалева Анна</td>
+          <td>45 ₽</td>
+          <td>3 000</td>
+          <td>10.04.2026</td>
+        </tr><tr>
+          <td>SM118020089</td>
+          <td>Белова Анастасия</td>
+          <td>⚠ нет</td>
+          <td>10 000</td>
+          <td>10.04.2026</td>
+        </tr><tr>
+          <td>SM118020090</td>
+          <td>Белова Анастасия</td>
+          <td>⚠ нет</td>
+          <td>10 000</td>
+          <td>10.04.2026</td>
+        </tr><tr>
+          <td>SM121010082</td>
+          <td>Боцкалева Анна</td>
+          <td>52 ₽</td>
+          <td>6 000</td>
+          <td>11.04.2026</td>
+        </tr></tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>📉 Низкая оборачиваемость (&lt;30 дней)</h2>
+      <div class="table-wrap">
+      <table>
+        <thead><tr><th>Артикул</th><th>Наименование</th><th>Менеджер</th><th>Остатки ВБ</th><th>ФФ</th><th>Темп/день</th><th>Дней запаса</th></tr></thead>
+        <tbody><tr>
           <td>edt_crush_sugar</td>
           <td>Туалетная вода женская «CRUSH …</td>
           <td></td>
           <td>0</td>
+          <td>0</td>
           <td>4.0</td>
-          <td style="color:#ef4444;font-weight:700">0.0</td>
-        </tr><tr>
-          <td>SM122020004</td>
-          <td>Сыворотка для лица SEMILY увла…</td>
-          <td></td>
-          <td>0</td>
-          <td>10.0</td>
-          <td style="color:#ef4444;font-weight:700">0.0</td>
-        </tr><tr>
-          <td>maslo3000mlcocos</td>
-          <td>Масло для тела SEMILY массажно…</td>
-          <td>Яна Т</td>
-          <td>0</td>
-          <td>6.0</td>
           <td style="color:#ef4444;font-weight:700">0.0</td>
         </tr><tr>
           <td>4032-103</td>
           <td>Тональный крем FARRES AffiniTo…</td>
           <td></td>
+          <td>0</td>
           <td>0</td>
           <td>4.0</td>
           <td style="color:#ef4444;font-weight:700">0.0</td>
@@ -365,61 +544,14 @@
           <td>Матовая помада FARRES NATURAL …</td>
           <td></td>
           <td>0</td>
+          <td>0</td>
           <td>2.0</td>
-          <td style="color:#ef4444;font-weight:700">0.0</td>
-        </tr><tr>
-          <td>Semily CreamBodyBois</td>
-          <td>Крем для тела SEMILY парфюмиро…</td>
-          <td>Анастасия Б.</td>
-          <td>0</td>
-          <td>6.0</td>
-          <td style="color:#ef4444;font-weight:700">0.0</td>
-        </tr><tr>
-          <td>4057-102</td>
-          <td>Тональный крем FARRES Fit Me м…</td>
-          <td></td>
-          <td>0</td>
-          <td>1.0</td>
-          <td style="color:#ef4444;font-weight:700">0.0</td>
-        </tr><tr>
-          <td>Semily CreamBodyDevil</td>
-          <td>Крем для тела SEMILY парфюмиро…</td>
-          <td>Анастасия Б.</td>
-          <td>0</td>
-          <td>3.0</td>
           <td style="color:#ef4444;font-weight:700">0.0</td>
         </tr><tr>
           <td>W207-001-DG</td>
           <td>Карандаш для глаз FARRES с точ…</td>
           <td></td>
           <td>0</td>
-          <td>1.0</td>
-          <td style="color:#ef4444;font-weight:700">0.0</td>
-        </tr><tr>
-          <td>Pena_Mango</td>
-          <td>Пена для ванны SEMILY с аромат…</td>
-          <td>Яна Т</td>
-          <td>0</td>
-          <td>1.0</td>
-          <td style="color:#ef4444;font-weight:700">0.0</td>
-        </tr><tr>
-          <td>spray_7in1</td>
-          <td>Многофункциональный спрей для …</td>
-          <td></td>
-          <td>0</td>
-          <td>2.0</td>
-          <td style="color:#ef4444;font-weight:700">0.0</td>
-        </tr><tr>
-          <td>Semily Hydrophilic Argan Oil</td>
-          <td>Гидрофильное масло SEMILY с ма…</td>
-          <td>Анастасия Б.</td>
-          <td>0</td>
-          <td>2.0</td>
-          <td style="color:#ef4444;font-weight:700">0.0</td>
-        </tr><tr>
-          <td>SM126040059</td>
-          <td>Шампунь-гель для душа SEMILY с…</td>
-          <td></td>
           <td>0</td>
           <td>1.0</td>
           <td style="color:#ef4444;font-weight:700">0.0</td>
@@ -428,6 +560,7 @@
           <td>Спрей для волос SEMILY для при…</td>
           <td></td>
           <td>0</td>
+          <td>0</td>
           <td>1.0</td>
           <td style="color:#ef4444;font-weight:700">0.0</td>
         </tr><tr>
@@ -435,27 +568,15 @@
           <td>Тушь для ресниц FARRES The Col…</td>
           <td></td>
           <td>0</td>
-          <td>1.0</td>
-          <td style="color:#ef4444;font-weight:700">0.0</td>
-        </tr><tr>
-          <td>enzimnaya_pudra_hydra</td>
-          <td>Пудра для умывания SEMILY энзи…</td>
-          <td>Яна Т</td>
           <td>0</td>
           <td>1.0</td>
-          <td style="color:#ef4444;font-weight:700">0.0</td>
-        </tr><tr>
-          <td>Nokso PenkaGT</td>
-          <td>Пенка для умывания NOKSO зелен…</td>
-          <td>Яна Т</td>
-          <td>0</td>
-          <td>2.0</td>
           <td style="color:#ef4444;font-weight:700">0.0</td>
         </tr><tr>
           <td>SM141020194</td>
           <td>Пэды SEMILY с витамином С для …</td>
           <td></td>
           <td>1</td>
+          <td>0</td>
           <td>3.0</td>
           <td style="color:#ef4444;font-weight:700">0.3</td>
         </tr><tr>
@@ -463,111 +584,103 @@
           <td>Гель-уход для кожи SEMILY скло…</td>
           <td></td>
           <td>1</td>
+          <td>0</td>
           <td>1.0</td>
           <td style="color:#ef4444;font-weight:700">1.0</td>
-        </tr><tr>
-          <td>Semily ChocoCoffeeScrub</td>
-          <td>Скраб для тела SEMILY шоколадн…</td>
-          <td>Яна Т</td>
-          <td>13</td>
-          <td>10.0</td>
-          <td style="color:#ef4444;font-weight:700">1.3</td>
         </tr><tr>
           <td>SM105020103</td>
           <td>Крем для лица SEMILY дневной м…</td>
           <td></td>
           <td>108</td>
+          <td>0</td>
           <td>62.0</td>
           <td style="color:#ef4444;font-weight:700">1.7</td>
+        </tr><tr>
+          <td>4057-102</td>
+          <td>Тональный крем FARRES Fit Me м…</td>
+          <td></td>
+          <td>0</td>
+          <td>2</td>
+          <td>1.0</td>
+          <td style="color:#ef4444;font-weight:700">2.0</td>
         </tr><tr>
           <td>2118-03-DG</td>
           <td>Румяна компактные FARRES NATUR…</td>
           <td></td>
           <td>10</td>
+          <td>0</td>
           <td>4.0</td>
           <td style="color:#ef4444;font-weight:700">2.5</td>
         </tr><tr>
-          <td>Semily Hydrophilic Jojoba Oil</td>
-          <td>Гидрофильное гель-масло SEMILY…</td>
-          <td>Анастасия Б.</td>
-          <td>19</td>
-          <td>7.0</td>
-          <td style="color:#ef4444;font-weight:700">2.7</td>
+          <td>maslo500mlgrap</td>
+          <td>Масло для массажа тела SEMILY …</td>
+          <td>Яна Т</td>
+          <td>0</td>
+          <td>23</td>
+          <td>8.0</td>
+          <td style="color:#ef4444;font-weight:700">2.9</td>
         </tr><tr>
           <td>gelymivanieHYDRA</td>
           <td>Гель для умывания SEMILY увлаж…</td>
           <td>Анастасия Б.</td>
           <td>3</td>
+          <td>0</td>
           <td>1.0</td>
           <td style="color:#ef4444;font-weight:700">3.0</td>
         </tr><tr>
-          <td>Semily Hydrophilic Grape Oil</td>
-          <td>Гидрофильное гель-масло для ум…</td>
+          <td>Semily Hydrophilic Jojoba Oil</td>
+          <td>Гидрофильное гель-масло SEMILY…</td>
           <td>Анастасия Б.</td>
-          <td>4</td>
-          <td>1.0</td>
-          <td style="color:#ef4444;font-weight:700">4.0</td>
-        </tr><tr>
-          <td>SM121120006</td>
-          <td>Спрей для макияжа SEMILY фикси…</td>
-          <td></td>
-          <td>47</td>
-          <td>8.0</td>
-          <td style="color:#ef4444;font-weight:700">5.9</td>
+          <td>19</td>
+          <td>14</td>
+          <td>7.0</td>
+          <td style="color:#ef4444;font-weight:700">4.7</td>
         </tr><tr>
           <td>SM136030072</td>
           <td>Дезодорант для тела SEMILY нат…</td>
           <td></td>
           <td>47</td>
+          <td>0</td>
           <td>7.0</td>
           <td style="color:#ef4444;font-weight:700">6.7</td>
         </tr><tr>
-          <td>spray20v1Tabak</td>
-          <td>Крем-спрей для волос SEMILY 20…</td>
-          <td>Анастасия Б.</td>
-          <td>169</td>
-          <td>22.0</td>
-          <td style="color:#ef4444;font-weight:700">7.7</td>
-        </tr><tr>
-          <td>SM121030162</td>
-          <td>Спрей для постельного белья SE…</td>
+          <td>SM121120006</td>
+          <td>Спрей для макияжа SEMILY фикси…</td>
           <td></td>
-          <td>491</td>
-          <td>59.0</td>
-          <td style="color:#ef4444;font-weight:700">8.3</td>
+          <td>47</td>
+          <td>7</td>
+          <td>8.0</td>
+          <td style="color:#ef4444;font-weight:700">6.8</td>
         </tr><tr>
-          <td>Semily MasloBleskCHERRY</td>
-          <td>Масло-блеск для губ SEMILY CHE…</td>
+          <td>Semily CreamBodyDevil</td>
+          <td>Крем для тела SEMILY парфюмиро…</td>
           <td>Анастасия Б.</td>
-          <td>715</td>
-          <td>76.0</td>
-          <td style="color:#ef4444;font-weight:700">9.4</td>
+          <td>0</td>
+          <td>22</td>
+          <td>3.0</td>
+          <td style="color:#ef4444;font-weight:700">7.3</td>
         </tr><tr>
           <td>4032-101</td>
           <td>Тональный крем FARRES AffiniTo…</td>
           <td></td>
           <td>76</td>
+          <td>2</td>
           <td>8.0</td>
-          <td style="color:#ef4444;font-weight:700">9.5</td>
+          <td style="color:#ef4444;font-weight:700">9.8</td>
         </tr><tr>
-          <td>Shampooantiyell</td>
-          <td>Шампунь для волос SEMILY нейтр…</td>
-          <td>Анастасия Б.</td>
-          <td>667</td>
-          <td>62.0</td>
-          <td style="color:#ef4444;font-weight:700">10.8</td>
-        </tr><tr>
-          <td>Semily Bubble bath Blackberry</td>
-          <td>Пена для ванны SEMILY с аромат…</td>
-          <td>Яна Т</td>
-          <td>233</td>
-          <td>21.0</td>
-          <td style="color:#ef4444;font-weight:700">11.1</td>
+          <td>spray_7in1</td>
+          <td>Многофункциональный спрей для …</td>
+          <td></td>
+          <td>0</td>
+          <td>20</td>
+          <td>2.0</td>
+          <td style="color:#ef4444;font-weight:700">10.0</td>
         </tr><tr>
           <td>4057-101</td>
           <td>Тональный крем FARRES Fit Me м…</td>
           <td></td>
           <td>35</td>
+          <td>0</td>
           <td>3.0</td>
           <td style="color:#ef4444;font-weight:700">11.7</td>
         </tr><tr>
@@ -575,6 +688,7 @@
           <td>Молочко для тела SEMILY мерцаю…</td>
           <td></td>
           <td>424</td>
+          <td>0</td>
           <td>35.0</td>
           <td style="color:#ef4444;font-weight:700">12.1</td>
         </tr><tr>
@@ -582,83 +696,79 @@
           <td>Шампунь для волос SEMILY увлаж…</td>
           <td>Яна Т</td>
           <td>680</td>
+          <td>2</td>
           <td>53.0</td>
-          <td style="color:#ef4444;font-weight:700">12.8</td>
+          <td style="color:#ef4444;font-weight:700">12.9</td>
         </tr><tr>
-          <td>maskakeratin</td>
-          <td>Маска для волос SEMILY восстан…</td>
-          <td>Анастасия Б.</td>
-          <td>3275</td>
-          <td>247.0</td>
-          <td style="color:#ef4444;font-weight:700">13.3</td>
+          <td>enzimnaya_pudra_hydra</td>
+          <td>Пудра для умывания SEMILY энзи…</td>
+          <td>Яна Т</td>
+          <td>0</td>
+          <td>14</td>
+          <td>1.0</td>
+          <td style="color:#f59e0b;font-weight:700">14.0</td>
         </tr><tr>
           <td>SM105100083</td>
           <td>Ремувер для кутикулы SEMILY CU…</td>
           <td></td>
           <td>43</td>
+          <td>0</td>
           <td>3.0</td>
           <td style="color:#f59e0b;font-weight:700">14.3</td>
         </tr><tr>
-          <td>spray_laminator_parli</td>
-          <td>Спрей - ламинатор для волос се…</td>
-          <td></td>
-          <td>134</td>
-          <td>9.0</td>
-          <td style="color:#f59e0b;font-weight:700">14.9</td>
+          <td>Pena_Mango</td>
+          <td>Пена для ванны SEMILY с аромат…</td>
+          <td>Яна Т</td>
+          <td>0</td>
+          <td>15</td>
+          <td>1.0</td>
+          <td style="color:#f59e0b;font-weight:700">15.0</td>
+        </tr><tr>
+          <td>Semily Bubble bath Blackberry</td>
+          <td>Пена для ванны SEMILY с аромат…</td>
+          <td>Яна Т</td>
+          <td>233</td>
+          <td>91</td>
+          <td>21.0</td>
+          <td style="color:#f59e0b;font-weight:700">15.4</td>
         </tr><tr>
           <td>BalmCherry</td>
           <td>Бальзам для волос SEMILY восст…</td>
           <td>Анастасия Б.</td>
           <td>3968</td>
+          <td>263</td>
           <td>262.0</td>
-          <td style="color:#f59e0b;font-weight:700">15.1</td>
+          <td style="color:#f59e0b;font-weight:700">16.1</td>
         </tr><tr>
-          <td>suhoishampun</td>
-          <td>Шампунь для волос SEMILY сухой…</td>
+          <td>maskakeratin</td>
+          <td>Маска для волос SEMILY восстан…</td>
           <td>Анастасия Б.</td>
-          <td>7758</td>
-          <td>410.0</td>
+          <td>3275</td>
+          <td>1402</td>
+          <td>247.0</td>
           <td style="color:#f59e0b;font-weight:700">18.9</td>
         </tr><tr>
           <td>Semily BlackberryScrub</td>
           <td>Скраб для тела SEMILY с ежевик…</td>
           <td>Яна Т</td>
           <td>256</td>
+          <td>0</td>
           <td>13.0</td>
           <td style="color:#f59e0b;font-weight:700">19.7</td>
-        </tr><tr>
-          <td>Semily LipMaskBerry</td>
-          <td>Маска для губ SEMILY ягодная 1…</td>
-          <td>Яна Т</td>
-          <td>780</td>
-          <td>38.0</td>
-          <td style="color:#f59e0b;font-weight:700">20.5</td>
         </tr><tr>
           <td>SM105020007</td>
           <td>Крем для лица SEMILY омолажива…</td>
           <td></td>
           <td>330</td>
+          <td>0</td>
           <td>16.0</td>
           <td style="color:#f59e0b;font-weight:700">20.6</td>
-        </tr><tr>
-          <td>Semily CoconutScrub</td>
-          <td>Скраб для тела SEMILY кокосовы…</td>
-          <td>Яна Т</td>
-          <td>126</td>
-          <td>6.0</td>
-          <td style="color:#f59e0b;font-weight:700">21.0</td>
-        </tr><tr>
-          <td>Bubble bath</td>
-          <td>Пена для ванны SEMILY с аромат…</td>
-          <td>Яна Т</td>
-          <td>507</td>
-          <td>24.0</td>
-          <td style="color:#f59e0b;font-weight:700">21.1</td>
         </tr><tr>
           <td>SivorotkaAmpCollagen</td>
           <td>Сыворотка для лица "Sendo" АМП…</td>
           <td></td>
           <td>304</td>
+          <td>0</td>
           <td>14.0</td>
           <td style="color:#f59e0b;font-weight:700">21.7</td>
         </tr><tr>
@@ -666,55 +776,71 @@
           <td>Крем для ног SEMILY смягчающий…</td>
           <td></td>
           <td>393</td>
+          <td>0</td>
           <td>18.0</td>
           <td style="color:#f59e0b;font-weight:700">21.8</td>
         </tr><tr>
-          <td>Balmantiyell</td>
-          <td>Бальзам для волос SEMILY нейтр…</td>
-          <td>Анастасия Б.</td>
-          <td>429</td>
-          <td>19.0</td>
-          <td style="color:#f59e0b;font-weight:700">22.6</td>
-        </tr><tr>
-          <td>Nokso PeelGelMent</td>
-          <td>NOKSO Пилинг-скатка для лица F…</td>
-          <td>Яна Т</td>
-          <td>744</td>
-          <td>31.0</td>
-          <td style="color:#f59e0b;font-weight:700">24.0</td>
-        </tr><tr>
-          <td>SM132020055</td>
-          <td>Патчи SEMILY от акне двойного …</td>
+          <td>SM121030162</td>
+          <td>Спрей для постельного белья SE…</td>
           <td></td>
-          <td>4672</td>
-          <td>186.0</td>
-          <td style="color:#f59e0b;font-weight:700">25.1</td>
+          <td>491</td>
+          <td>800</td>
+          <td>59.0</td>
+          <td style="color:#f59e0b;font-weight:700">21.9</td>
+        </tr><tr>
+          <td>Bubble bath</td>
+          <td>Пена для ванны SEMILY с аромат…</td>
+          <td>Яна Т</td>
+          <td>507</td>
+          <td>23</td>
+          <td>24.0</td>
+          <td style="color:#f59e0b;font-weight:700">22.1</td>
+        </tr><tr>
+          <td>spray_laminator_parli</td>
+          <td>Спрей - ламинатор для волос се…</td>
+          <td></td>
+          <td>134</td>
+          <td>79</td>
+          <td>9.0</td>
+          <td style="color:#f59e0b;font-weight:700">23.7</td>
         </tr><tr>
           <td>4032-107</td>
           <td>Тональный крем FARRES AffiniTo…</td>
           <td></td>
           <td>176</td>
+          <td>0</td>
           <td>7.0</td>
           <td style="color:#f59e0b;font-weight:700">25.1</td>
         </tr><tr>
-          <td>Semily WrapHot</td>
-          <td>Обертывание для тела SEMILY го…</td>
-          <td>Анастасия Б.</td>
-          <td>523</td>
-          <td>20.0</td>
-          <td style="color:#f59e0b;font-weight:700">26.1</td>
+          <td>Nokso PeelGelMent</td>
+          <td>NOKSO Пилинг-скатка для лица F…</td>
+          <td>Яна Т</td>
+          <td>744</td>
+          <td>50</td>
+          <td>31.0</td>
+          <td style="color:#f59e0b;font-weight:700">25.6</td>
         </tr><tr>
           <td>W207-004-DG</td>
           <td>Карандаш для губ FARRES с точи…</td>
           <td></td>
           <td>183</td>
+          <td>0</td>
           <td>7.0</td>
           <td style="color:#f59e0b;font-weight:700">26.1</td>
+        </tr><tr>
+          <td>Semily WrapHot</td>
+          <td>Обертывание для тела SEMILY го…</td>
+          <td>Анастасия Б.</td>
+          <td>523</td>
+          <td>4</td>
+          <td>20.0</td>
+          <td style="color:#f59e0b;font-weight:700">26.4</td>
         </tr><tr>
           <td>SM128070018</td>
           <td>Помада для губ SEMILY вельвето…</td>
           <td></td>
           <td>930</td>
+          <td>0</td>
           <td>35.0</td>
           <td style="color:#f59e0b;font-weight:700">26.6</td>
         </tr><tr>
@@ -722,36 +848,184 @@
           <td>Гель для душа NOKSO жасмин и ц…</td>
           <td>Яна Т</td>
           <td>213</td>
+          <td>9</td>
           <td>8.0</td>
-          <td style="color:#f59e0b;font-weight:700">26.6</td>
+          <td style="color:#f59e0b;font-weight:700">27.8</td>
         </tr><tr>
-          <td>spray_thermal_parli</td>
-          <td>Спрей - термозащита серии «Par…</td>
+          <td>SM132020055</td>
+          <td>Патчи SEMILY от акне двойного …</td>
           <td></td>
-          <td>168</td>
-          <td>6.0</td>
-          <td style="color:#f59e0b;font-weight:700">28.0</td>
-        </tr><tr>
-          <td>Semily CurlyShampoo</td>
-          <td>Шампунь для волос SEMILY для к…</td>
-          <td>Яна Т</td>
-          <td>319</td>
-          <td>11.0</td>
-          <td style="color:#f59e0b;font-weight:700">29.0</td>
-        </tr><tr>
-          <td>Semily MasloBleskPECAN</td>
-          <td>Масло-блеск для губ SEMILY PEC…</td>
-          <td>Анастасия Б.</td>
-          <td>815</td>
-          <td>28.0</td>
-          <td style="color:#f59e0b;font-weight:700">29.1</td>
+          <td>4672</td>
+          <td>509</td>
+          <td>186.0</td>
+          <td style="color:#f59e0b;font-weight:700">27.9</td>
         </tr></tbody>
       </table>
       </div>
     </div>
 
     <div class="section">
-      <h2>📁 Реестр спецификаций (последние 10)</h2>
+      <h2>🧪 КМ — Карточки материалов</h2>
+      <div class="table-wrap">
+      <table>
+        <thead><tr><th>Артикул</th><th>Наименование</th><th>Тип</th><th>Поставщик</th></tr></thead>
+        <tbody><tr>
+          <td>brush hair</td>
+          <td>Массажеры косметические</td>
+          <td>База</td>
+          <td>Китай (ГП)</td>
+        </tr><tr>
+          <td>brush hair blue</td>
+          <td>Массажеры косметические голубые</td>
+          <td>База</td>
+          <td>Китай (ГП)</td>
+        </tr><tr>
+          <td>brush hair green</td>
+          <td>Массажеры косметические зеленые</td>
+          <td>База</td>
+          <td>Китай (ГП)</td>
+        </tr><tr>
+          <td>brush hair pink</td>
+          <td>Массажеры косметические розовые</td>
+          <td>База</td>
+          <td>Китай (ГП)</td>
+        </tr><tr>
+          <td>manik_nabor</td>
+          <td>Маникюрный набор черный</td>
+          <td>База</td>
+          <td>Китай (ГП)</td>
+        </tr><tr>
+          <td>pincet_black</td>
+          <td>Пинцет для бровей и ресниц Черный</td>
+          <td>База</td>
+          <td>Китай (ГП)</td>
+        </tr><tr>
+          <td>pincet_brush_black</td>
+          <td>Пинцет с щеткой черный</td>
+          <td>База</td>
+          <td>Китай (ГП)</td>
+        </tr><tr>
+          <td>pincet_gold</td>
+          <td>Пинцет для бровей и ресниц золотой</td>
+          <td>База</td>
+          <td>Китай (ГП)</td>
+        </tr><tr>
+          <td>pincet_green</td>
+          <td>Пинцет для бровей зеленый</td>
+          <td>База</td>
+          <td>Китай (ГП)</td>
+        </tr><tr>
+          <td>pincet_metal</td>
+          <td>Пинцет для бровей серебрянный</td>
+          <td>База</td>
+          <td>Китай (ГП)</td>
+        </tr><tr>
+          <td>pincet_pink</td>
+          <td>Пинцет для бровей розовый</td>
+          <td>База</td>
+          <td>Китай (ГП)</td>
+        </tr><tr>
+          <td>nabor manik</td>
+          <td>Набор для маникюра и педикюра. Мани…</td>
+          <td>База</td>
+          <td>Китай (ГП)</td>
+        </tr><tr>
+          <td>suhoishampun</td>
+          <td>Сухой шампунь для волос</td>
+          <td>База</td>
+          <td>Арнест</td>
+        </tr><tr>
+          <td>Банка 500 мл</td>
+          <td>Банка "ПЭТ-500", № 22/500 (89) (про…</td>
+          <td>КМ</td>
+          <td>БМ-сервис</td>
+        </tr><tr>
+          <td>Банка 200 мл скрабы</td>
+          <td>Банка JM 200 мл PET, натурального (…</td>
+          <td>КМ</td>
+          <td>Завод Протей</td>
+        </tr><tr>
+          <td>Банка 200 мл крема</td>
+          <td>Банка №246 М 0,200 л d 89 П30 зелен…</td>
+          <td>КМ</td>
+          <td>Завод Протей</td>
+        </tr><tr>
+          <td>Банка крем воск 100 мл</td>
+          <td>Банка №450 0,100л зеленая прозрачна…</td>
+          <td>КМ</td>
+          <td>Завод Протей</td>
+        </tr><tr>
+          <td>Банка 300 бесцветная</td>
+          <td>Банка №522 М 0,300л d89 П30 бесцвет…</td>
+          <td>КМ</td>
+          <td>Завод Протей</td>
+        </tr><tr>
+          <td>Банка 300 маска для волос</td>
+          <td>Банка №522 М 0,300л d89 П32 зеленая…</td>
+          <td>КМ</td>
+          <td>ДжиэмТрейдинг</td>
+        </tr><tr>
+          <td>Дозатор гидрофильноемасло</td>
+          <td>Дозатор 24/410 черный с тонким носи…</td>
+          <td>КМ</td>
+          <td>Китай</td>
+        </tr><tr>
+          <td>Дозатор шампунь</td>
+          <td>Дозатор винтовой 24\410 модель DV-1…</td>
+          <td>КМ</td>
+          <td>Китай</td>
+        </tr><tr>
+          <td>Дозатор гель интим</td>
+          <td>Дозатор косметический с клипсой 24\…</td>
+          <td>КМ</td>
+          <td>Китай</td>
+        </tr><tr>
+          <td>шампуньежедневдозатор</td>
+          <td>К-006 Помповый дозатор 28/410 черны…</td>
+          <td>КМ</td>
+          <td>СЗПИ</td>
+        </tr><tr>
+          <td>Дозатор пенка</td>
+          <td>К-141 Помповый дозатор для пены 42/…</td>
+          <td>КМ</td>
+          <td>Китай</td>
+        </tr><tr>
+          <td>Канистра масло 3000 мл</td>
+          <td>Канистра п\эт V=3 л (УЗП)</td>
+          <td>КМ</td>
+          <td>УЗП</td>
+        </tr><tr>
+          <td>Коробка гель для бровей</td>
+          <td>Картонная коробка под гель для бров…</td>
+          <td>КМ</td>
+          <td>Лайт</td>
+        </tr><tr>
+          <td>Коробка сыворотка д/б</td>
+          <td>Картонная коробка под сыворотку для…</td>
+          <td>КМ</td>
+          <td>Лайт</td>
+        </tr><tr>
+          <td>Колпачок масло 500 мл</td>
+          <td>Колпачок Флип-топ 28/410 белый</td>
+          <td>КМ</td>
+          <td>Бьютипласт</td>
+        </tr><tr>
+          <td>Коробка масло кутикулы</td>
+          <td>Коробка "Масло для кутикулы"</td>
+          <td>КМ</td>
+          <td>Корвус</td>
+        </tr><tr>
+          <td>Коробка Сыворотка акне</td>
+          <td>Коробка "Сыворотка anti-acne"</td>
+          <td>КМ</td>
+          <td>Зенит</td>
+        </tr></tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>📋 Реестр спецификаций (последние 10 подписанных)</h2>
       <div class="table-wrap">
       <table>
         <thead><tr><th>Дата</th><th>Производитель</th><th>Название</th><th>Артикул</th><th>Статус</th></tr></thead>
@@ -760,61 +1034,61 @@
           <td>ПАРЛИ</td>
           <td>Пена для ванны SEMILY с аромат…</td>
           <td>Bubble bath</td>
-          <td>Подписана</td>
+          <td style="color:#22c55e">Подписана</td>
         </tr><tr>
           <td></td>
           <td>ПАРЛИ</td>
           <td>Пена для ванны SEMILY с аромат…</td>
           <td>Semily Bubble bath Blackberry</td>
-          <td>Подписана</td>
+          <td style="color:#22c55e">Подписана</td>
         </tr><tr>
           <td></td>
           <td>ПАРЛИ</td>
           <td>Маска для лица SEMILY тонизиру…</td>
           <td>maskafacetonizNEW</td>
-          <td>Подписана</td>
+          <td style="color:#22c55e">Подписана</td>
         </tr><tr>
           <td></td>
           <td>ПАРЛИ</td>
           <td>Маска для лица SEMILY энзимная…</td>
           <td>maskafaceakneNEW</td>
-          <td>Подписана</td>
+          <td style="color:#22c55e">Подписана</td>
         </tr><tr>
           <td></td>
           <td>ПАРЛИ</td>
           <td>Маска для лица SEMILY тонизиру…</td>
           <td>maskafacetonizNEW</td>
-          <td>Подписана</td>
+          <td style="color:#22c55e">Подписана</td>
         </tr><tr>
           <td></td>
           <td>ПАРЛИ</td>
           <td>Пена для ванн BUBBLE ВАТН CHER…</td>
           <td>Bubble bath</td>
-          <td>Подписана</td>
+          <td style="color:#22c55e">Подписана</td>
         </tr><tr>
           <td></td>
           <td>Апрель</td>
           <td>Крем-воск для рук, ног и тела …</td>
           <td>krem_vosk_cherry</td>
-          <td>Подписана</td>
+          <td style="color:#22c55e">Подписана</td>
         </tr><tr>
           <td></td>
           <td>Хороший поставщик</td>
           <td>Ф-252(Ф-147) Инжекция ПНД Флак…</td>
           <td>Флакон шампунь 2</td>
-          <td>Подписана</td>
+          <td style="color:#22c55e">Подписана</td>
         </tr><tr>
           <td></td>
           <td>БИТЛДЖЕМ</td>
           <td>Молочко для кожи SEMILY склонн…</td>
           <td>SM137030094</td>
-          <td>Подписана</td>
+          <td style="color:#22c55e">Подписана</td>
         </tr><tr>
           <td></td>
           <td>БИТЛДЖЕМ</td>
           <td>Гель для душа с кислотами</td>
           <td>SM102020093</td>
-          <td>Подписана</td>
+          <td style="color:#22c55e">Подписана</td>
         </tr></tbody>
       </table>
       </div>
