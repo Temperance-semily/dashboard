@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Semily | Закупки</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:#0f1117;color:#e2e8f0;font-family:'Segoe UI',system-ui,sans-serif;font-size:14px}
@@ -38,6 +39,8 @@
   .bar-track{flex:1;height:20px;background:#2d3149;border-radius:4px;overflow:hidden}
   .bar-fill{height:100%;border-radius:4px}
   .bar-val{width:40px;text-align:right;font-weight:600}
+  .charts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
+  .chart-card{background:#1a1d27;border-radius:12px;padding:20px;min-height:300px}
   @media(max-width:600px){
     .kpi-val{font-size:28px}
     header h1{font-size:16px}
@@ -47,7 +50,7 @@
 <body>
 <header>
   <h1>SEMILY | <span>ЗАКУПКИ</span></h1>
-  <div class="updated">Обновлено: 30.03.2026 11:21</div>
+  <div class="updated">Обновлено: 30.03.2026 11:25</div>
 </header>
 <main>
 
@@ -71,6 +74,16 @@
       <div class="kpi-card">
         <div class="kpi-val" style="color:#a5b4fc">77</div>
         <div class="kpi-label">SKU в дефиците</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>📊 Аналитика</h2>
+      <div class="charts-grid">
+        <div class="chart-card"><canvas id="chartOverdue"></canvas></div>
+        <div class="chart-card"><canvas id="chartTurnover"></canvas></div>
+        <div class="chart-card"><canvas id="chartWeekly"></canvas></div>
+        <div class="chart-card"><canvas id="chartProducers"></canvas></div>
       </div>
     </div>
 
@@ -1124,5 +1137,71 @@
       </div>
     </div>
 </main>
+<script>
+(function(){
+  var data = {"overdue_by_producer": {"АЛЬЯНС ООО": 14, "ДЖИЭСЭС КОСМЕТИКС ООО": 2, "ИВА ХОЛДИНГ ООО": 2, "БИТЛДЖЕМ ООО": 2, "Баккарат ООО": 1, "МЫЛОВАРЕННАЯ МАНУФАКТУРА КУАФЕР ООО": 1}, "turnover_by_brand": {"PARLI": {"КРИТИЧНО": 2, "РИСК": 1}, "Farres": {"КРИТИЧНО": 8, "РИСК": 2}, "SEMILY": {"КРИТИЧНО": 12, "РИСК": 14}, "SENDO": {"КРИТИЧНО": 0, "РИСК": 1}, "NOKSO": {"КРИТИЧНО": 0, "РИСК": 2}}, "weekly_arrival": [1732219097728, 1626148660779, 0, 0], "gp_by_producer": {"Косметические технологии ООО": 640588, "АЛЬЯНС ООО": 341000, "ПАРЛИ ООО": 238783, "ИВА ХОЛДИНГ ООО": 205204, "Баккарат ООО": 174900, "КРЛАБ ООО": 152068, "СОВАЖ ООО": 100002, "МЫЛОВАРЕННАЯ МАНУФАКТУРА КУАФЕР ООО": 87502, "Остальные": 346181}};
+
+  // Chart 1: Просрочки по производителям
+  var overdueData = data.overdue_by_producer;
+  var overdueLabels = Object.keys(overdueData);
+  var overdueVals = Object.values(overdueData);
+  if(overdueLabels.length>0){
+    var maxV = Math.max(...overdueVals)||1;
+    var colors1 = overdueVals.map(function(v){
+      var t=v/maxV;
+      var r=Math.round(255*t+234*(1-t));
+      var g=Math.round(68*t+179*(1-t));
+      var b=Math.round(68*t+8*(1-t));
+      return 'rgb('+r+','+g+','+b+')';
+    });
+    new Chart(document.getElementById('chartOverdue'),{
+      type:'bar',
+      data:{labels:overdueLabels,datasets:[{label:'Просрочек',data:overdueVals,backgroundColor:colors1,borderRadius:4}]},
+      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},title:{display:true,text:'⚠️ Просрочки по производителям',color:'#a5b4fc',font:{size:13}}},scales:{x:{ticks:{color:'#94a3b8'},grid:{color:'#2d3149'}},y:{ticks:{color:'#94a3b8'},grid:{color:'#2d3149'}}}}
+    });
+  }
+
+  // Chart 2: Оборачиваемость по брендам
+  var tvData = data.turnover_by_brand;
+  var tvBrands = Object.keys(tvData);
+  if(tvBrands.length>0){
+    var crit = tvBrands.map(function(b){return tvData[b]['КРИТИЧНО']||0;});
+    var risk = tvBrands.map(function(b){return tvData[b]['РИСК']||0;});
+    new Chart(document.getElementById('chartTurnover'),{
+      type:'bar',
+      data:{labels:tvBrands,datasets:[
+        {label:'КРИТИЧНО',data:crit,backgroundColor:'#ef4444',borderRadius:2},
+        {label:'РИСК',data:risk,backgroundColor:'#f59e0b',borderRadius:2}
+      ]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#94a3b8'}},title:{display:true,text:'📉 Низкая оборачиваемость по брендам',color:'#a5b4fc',font:{size:13}}},scales:{x:{stacked:true,ticks:{color:'#94a3b8',maxRotation:45},grid:{color:'#2d3149'}},y:{stacked:true,ticks:{color:'#94a3b8'},grid:{color:'#2d3149'}}}}
+    });
+  }
+
+  // Chart 3: Приход по неделям
+  var wArr = data.weekly_arrival;
+  new Chart(document.getElementById('chartWeekly'),{
+    type:'line',
+    data:{labels:['Эта неделя','Следующая','+2 нед','+3 нед'],datasets:[{
+      label:'Шт',data:wArr,borderColor:'#6366f1',backgroundColor:'rgba(99,102,241,0.15)',fill:true,tension:0.4,pointBackgroundColor:'#6366f1'
+    }]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},title:{display:true,text:'📦 Приход по неделям, шт',color:'#a5b4fc',font:{size:13}}},scales:{x:{ticks:{color:'#94a3b8'},grid:{color:'#2d3149'}},y:{ticks:{color:'#94a3b8'},grid:{color:'#2d3149'}}}}
+  });
+
+  // Chart 4: Доля ГП по производителям
+  var gpData = data.gp_by_producer;
+  var gpLabels = Object.keys(gpData);
+  var gpVals = Object.values(gpData);
+  var palette=['#6366f1','#8b5cf6','#ec4899','#f43f5e','#f97316','#eab308','#22c55e','#06b6d4','#64748b'];
+  if(gpLabels.length>0){
+    var totalGP=gpVals.reduce(function(a,b){return a+b;},0)||1;
+    var gpLabelsWithPct=gpLabels.map(function(l,i){return l+' ('+Math.round(gpVals[i]/totalGP*100)+'%)';});
+    new Chart(document.getElementById('chartProducers'),{
+      type:'doughnut',
+      data:{labels:gpLabelsWithPct,datasets:[{data:gpVals,backgroundColor:palette,borderWidth:1,borderColor:'#1a1d27'}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#94a3b8',font:{size:11}}},title:{display:true,text:'🏭 Доля ГП по производителям',color:'#a5b4fc',font:{size:13}}}}
+    });
+  }
+})();
+</script>
 </body>
 </html>
