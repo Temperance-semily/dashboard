@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEMILY | ЗАКУПКИ</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --card2: #20243a;
+    --accent: #6366f1;
+    --accent-light: #818cf8;
+    --red: #ef4444;
+    --yellow: #f59e0b;
+    --green: #22c55e;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --border: #2d3148;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-icon {
+    width: 36px; height: 36px;
+    background: var(--accent);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 16px; color: #fff;
+  }
+  .logo-text {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--text);
+  }
+  .logo-text span { color: var(--accent-light); }
+  .header-right {
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  }
+  .update-date {
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .update-date strong { color: var(--text); }
+  .btn-refresh {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 6px;
+    transition: background 0.2s;
+  }
+  .btn-refresh:hover { background: var(--accent-light); }
+
+  /* LAYOUT */
+  main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  /* KPI CARDS */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .kpi-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .kpi-card.accent { border-color: var(--accent); }
+  .kpi-card.danger { border-color: var(--red); }
+  .kpi-card.warn { border-color: var(--yellow); }
+  .kpi-label {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .kpi-value {
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--text);
+  }
+  .kpi-card.accent .kpi-value { color: var(--accent-light); }
+  .kpi-card.danger .kpi-value { color: var(--red); }
+  .kpi-card.warn .kpi-value { color: var(--yellow); }
+  .kpi-sub {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* ALERT BLOCK */
+  .alert-block {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .alert-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .alert-dot {
+    width: 10px; height: 10px;
+    background: var(--red);
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .alert-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fca5a5;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .alert-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    list-style: none;
+  }
+  .alert-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: rgba(239, 68, 68, 0.06);
+    border-radius: 8px;
+    border-left: 3px solid var(--red);
+    font-size: 13px;
+  }
+  .alert-num {
+    font-weight: 700;
+    color: var(--red);
+    font-size: 15px;
+    min-width: 20px;
+  }
+  .alert-info { flex: 1; }
+  .alert-name { font-weight: 600; color: var(--text); }
+  .alert-meta { color: var(--muted); font-size: 12px; margin-top: 2px; }
+
+  /* TABLE */
+  .table-wrap {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .table-header-row {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  thead th {
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--muted);
+    background: rgba(255,255,255,0.02);
+    border-bottom: 1px solid var(--border);
+  }
+  tbody tr {
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: background 0.15s;
+  }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: rgba(255,255,255,0.03); }
+  td {
+    padding: 11px 14px;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .badge-red { background: rgba(239,68,68,0.15); color: #fca5a5; }
+  .badge-yellow { background: rgba(245,158,11,0.15); color: #fcd34d; }
+  .badge-green { background: rgba(34,197,94,0.15); color: #86efac; }
+  .days-num { font-weight: 700; }
+  .days-red { color: var(--red); }
+  .days-yellow { color: var(--yellow); }
+  .days-green { color: var(--green); }
+  .amount { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .status-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    background: rgba(99,102,241,0.15);
+    color: var(--accent-light);
+  }
+
+  /* MANAGERS */
+  .managers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .manager-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+  }
+  .manager-name {
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+  .manager-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .stat-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .stat-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .stat-label span:last-child { font-weight: 700; color: var(--text); }
+  .progress-track {
+    height: 6px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.5s ease;
+  }
+  .fill-accent { background: var(--accent); }
+  .fill-red { background: var(--red); }
+  .fill-yellow { background: var(--yellow); }
+  .fill-green { background: var(--green); }
+
+  /* BAR CHART */
+  .chart-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .bar-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 4px;
+  }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .bar-label {
+    font-size: 13px;
+    color: var(--muted);
+    min-width: 100px;
+    text-align: right;
+  }
+  .bar-track {
+    flex: 1;
+    height: 28px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    min-width: 36px;
+    transition: width 0.6s ease;
+  }
+  .bar-fill.yellow-bar { background: var(--yellow); }
+  .bar-fill.orange-bar { background: #f97316; }
+  .bar-fill.red-bar { background: var(--red); }
+
+  /* TWO COL */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  /* STATUS DOT */
+  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
+  .dot-red { background: var(--red); }
+  .dot-yellow { background: var(--yellow); }
+  .dot-green { background: var(--green); }
+
+  /* REGISTRY TABLE */
+  .registry-status {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .rs-signed { background: rgba(34,197,94,0.15); color: #86efac; }
+  .rs-process { background: rgba(245,158,11,0.15); color: #fcd34d; }
+  .rs-pending { background: rgba(99,102,241,0.15); color: var(--accent-light); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .managers-grid { grid-template-columns: repeat(2, 1fr); }
+    .two-col { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .kpi-grid { grid-template-columns: 1fr 1fr; }
+    .managers-grid { grid-template-columns: 1fr; }
+    header { padding: 12px 16px; }
+    main { padding: 16px 12px; }
+    td, thead th { padding: 8px 10px; font-size: 12px; }
+    .kpi-value { font-size: 32px; }
+    .bar-label { min-width: 80px; font-size: 11px; }
+  }
+  @media (max-width: 440px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">S</div>
+    <div class="logo-text">SEMILY <span>|</span> ЗАКУПКИ</div>
+  </div>
+  <div class="header-right">
+    <div class="update-date">Обновлено: <strong>30.03.2026</strong></div>
+    <button class="btn-refresh">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+      Обновить данные
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- KPI -->
+  <section>
+    <div class="section-title">Ключевые показатели</div>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">Строк в работе</div>
+        <div class="kpi-value">233</div>
+        <div class="kpi-sub">активных позиций</div>
+      </div>
+      <div class="kpi-card accent">
+        <div class="kpi-label">Неподписанных спецификаций</div>
+        <div class="kpi-value">46</div>
+        <div class="kpi-sub">ожидают подписания</div>
+      </div>
+      <div class="kpi-card warn">
+        <div class="kpi-label">Просрочек сегодня</div>
+        <div class="kpi-value">26</div>
+        <div class="kpi-sub">из ежедневного отчёта</div>
+      </div>
+      <div class="kpi-card danger">
+        <div class="kpi-label">Критических (&gt;31 дня)</div>
+        <div class="kpi-value">15</div>
+        <div class="kpi-sub">требуют срочного решения</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALERT -->
+  <section>
+    <div class="alert-block">
+      <div class="alert-header">
+        <div class="alert-dot"></div>
+        <div class="alert-title">⚠ Требует внимания сейчас — Топ-3 риск-спецификации</div>
+      </div>
+      <ul class="alert-list">
+        <li>
+          <span class="alert-num">1</span>
+          <div class="alert-info">
+            <div class="alert-name">Semily WrapHot</div>
+            <div class="alert-meta">ИМПЕРИАЛ · Боцкалева Анна</div>
+          </div>
+        </li>
+        <li>
+          <span class="alert-num">2</span>
+          <div class="alert-info">
+            <div class="alert-name">Semily CreamBodyBaccarat</div>
+            <div class="alert-meta">ИМПЕРИАЛ · Боцкалева Анна</div>
+          </div>
+        </li>
+        <li>
+          <span class="alert-num">3</span>
+          <div class="alert-info">
+            <div class="alert-name">SM122020107 — Соваж</div>
+            <div class="alert-meta">СОВАЖ · Белова Анастасия</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- OVERDUE TABLE -->
+  <section>
+    <div class="table-wrap">
+      <div class="table-header-row">
+        <div class="section-title" style="margin-bottom:0">Просрочки по спецификациям</div>
+      </div>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>Артикул</th>
+              <th>Производитель</th>
+              <th>Менеджер</th>
+              <th>Статус</th>
+              <th>Дней просрочки</th>
+              <th>Сумма</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>SM102030125</strong></td>
+              <td>АЛЬЯНС</td>
+              <td>Пасютина Ирина</td>
+              <td><span class="status-tag">На линии</span></td>
+              <td><span class="badge badge-red">🔴 <span class="days-num days-red">10 дн</span></span></td>
+              <td class="amount">348 000 ₽</td>
+            </tr>
+            <tr>
+              <td><strong>SM138020112</strong></td>
+              <td>ДЖИЭСЭС</td>
+              <td>Белова Анастасия</td>
+              <td><span class="status-tag">На доставку</span></td>
+              <td><span class="badge badge-red">🔴 <span class="days-num days-red">7 дн</span></span></td>
+              <td class="amount">375 000 ₽</td>
+            </tr>
+            <tr>
+              <td><strong>maslo3000ml</strong></td>
+              <td>ИВА ХОЛДИНГ</td>
+              <td>Боцкалева Анна</td>
+              <td><span class="status-tag">На доставку</span></td>
+              <td><span class="badge badge-red">🔴 <span class="days-num days-red">6 дн</span></span></td>
+              <td class="amount">773 500 ₽</td>
+            </tr>
+            <tr>
+              <td><strong>SM102020098</strong></td>
+              <td>ДЖИЭСЭС</td>
+              <td>Белова Анастасия</td>
+              <td><span class="status-tag">На линии</span></td>
+              <td><span class="badge badge-red">🔴 <span class="days-num days-red">6 дн</span></span></td>
+              <td class="amount">372 000 ₽</td>
+            </tr>
+            <tr>
+              <td><strong>spray20v1Cherry</strong></td>
+              <td>АЛЬЯНС</td>
+              <td>Пасютина Ирина</td>
+              <td><span class="status-tag">На доставку</span></td>
+              <td><span class="badge badge-yellow">🟡 <span class="days-num days-yellow">3 дн</span></span></td>
+              <td class="amount">1 747 200 ₽</td>
+            </tr>
+            <tr>
+              <td><strong>sivorotcamorshin</strong></td>
+              <td>ИВА ХОЛДИНГ</td>
+              <td>Боцкалева Анна</td>
+              <td><span class="status-tag">Спец. подписана</span></td>
+              <td><span class="badge badge-yellow">🟡 <span class="days-num days-yellow">3 дн</span></span></td>
+              <td class="amount">1 072 140 ₽</td>
+            </tr>
+            <tr>
+              <td><strong>gelymivanie acne</strong></td>
+              <td>Баккарат</td>
+              <td>Белова Анастасия</td>
+              <td><span class="status-tag">На доставку</span></td>
+              <td><span class="badge badge-yellow">🟡 <span class="days-num days-yellow">3 дн</span></span></td>
+              <td class="amount">900 088 ₽</td>
+            </tr>
+            <tr>
+              <td><strong>Semily Gel men 3v1</strong></td>
+              <td>АЛЬЯНС</td>
+              <td>Пасютина Ирина</td>
+              <td><span class="status-tag">На доставку</span></td>
+              <td><span class="badge badge-yellow">🟡 <span class="days-num days-yellow">3 дн</span></span></td>
+              <td class="amount">731 988 ₽</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANAGERS -->
+  <section>
+    <div class="section-title">Рейтинг менеджеров</div>
+    <div class="managers-grid">
+      <div class="manager-card">
+        <div class="manager-name">Боцкалева Анна</div>
+        <div class="manager-stats">
+          <div class="stat-row">
+            <div class="stat-label"><span>Неподписанных спецификаций</span><span>23</span></div>
+            <div class="progress-track">
+              <div class="progress-fill fill-accent" style="width:100%"></div>
+            </div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-label"><span>Просрочек &gt;5 дней</span><span style="color:#fca5a5">17</span></div>
+            <div class="progress-track">
+              <div class="progress-fill fill-red" style="width:100%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="manager-card">
+        <div class="manager-name">Белова Анастасия</div>
+        <div class="manager-stats">
+          <div class="stat-row">
+            <div class="stat-label"><span>Неподписанных спецификаций</span><span>18</span></div>
+            <div class="progress-track">
+              <div class="progress-fill fill-accent" style="width:78%"></div>
+            </div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-label"><span>Просрочек &gt;5 дней</span><span style="color:#fcd34d">8</span></div>
+            <div class="progress-track">
+              <div class="progress-fill fill-yellow" style="width:47%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="manager-card">
+        <div class="manager-name">Пасютина Ирина</div>
+        <div class="manager-stats">
+          <div class="stat-row">
+            <div class="stat-label"><span>Неподписанных спецификаций</span><span>1</span></div>
+            <div class="progress-track">
+              <div class="progress-fill fill-accent" style="width:4%"></div>
+            </div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-label"><span>Просрочек &gt;5 дней</span><span style="color:#86efac">1</span></div>
+            <div class="progress-track">
+              <div class="progress-fill fill-green" style="width:6%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHART + MANUFACTURERS -->
+  <div class="two-col">
+
+    <!-- BAR CHART -->
+    <section>
+      <div class="chart-card">
+        <div class="section-title" style="margin-bottom:16px">Неподписанные по срокам</div>
+        <div class="bar-chart">
+          <div class="bar-row">
+            <div class="bar-label">5–15 дней</div>
+            <div class="bar-track">
+              <div class="bar-fill yellow-bar" style="width:17%">3</div>
+            </div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">16–30 дней</div>
+            <div class="bar-track">
+              <div class="bar-fill orange-bar" style="width:59%">11</div>
+            </div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">31+ дней</div>
+            <div class="bar-track">
+              <div class="bar-fill red-bar" style="width:80%">15</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:16px; display:flex; gap:16px; flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)">
+            <span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--yellow)"></span> 5–15 дн
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)">
+            <span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#f97316"></span> 16–30 дн
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)">
+            <span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--red)"></span> 31+ дн
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MANUFACTURERS -->
+    <section>
+      <div class="table-wrap" style="height:100%">
+        <div class="table-header-row">
+          <div class="section-title" style="margin-bottom:0">По производителям (топ-5)</div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Производитель</th>
+              <th>Неподписанных</th>
+              <th>Статус</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>ИМПЕРИАЛ</strong></td>
+              <td>7</td>
+              <td><span class="dot dot-red"></span> <span style="color:#fca5a5;font-size:12px;margin-left:4px">Критично</span></td>
+            </tr>
+            <tr>
+              <td><strong>Соваж</strong></td>
+              <td>3</td>
+              <td><span class="dot dot-yellow"></span> <span style="color:#fcd34d;font-size:12px;margin-left:4px">Внимание</span></td>
+            </tr>
+            <tr>
+              <td><strong>АЛЬЯНС</strong></td>
+              <td>3</td>
+              <td><span class="dot dot-yellow"></span> <span style="color:#fcd34d;font-size:12px;margin-left:4px">Внимание</span></td>
+            </tr>
+            <tr>
+              <td><strong>ДЖИЭСЭС</strong></td>
+              <td>2</td>
+              <td><span class="dot dot-yellow"></span> <span style="color:#fcd34d;font-size:12px;margin-left:4px">Внимание</span></td>
+            </tr>
+            <tr>
+              <td><strong>ИВА ХОЛДИНГ</strong></td>
+              <td>2</td>
+              <td><span class="dot dot-green"></span> <span style="color:#86efac;font-size:12px;margin-left:4px">Норма</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- REGISTRY -->
+  <section>
+    <div class="table-wrap">
+      <div class="table-header-row">
+        <div class="section-title" style="margin-bottom:0">Реестр спецификаций — последние 5</div>
+      </div>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>Дата</th>
+              <th>Производитель</th>
+              <th>Название</th>
+              <th>Артикул</th>
+              <th>Статус</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>27.03.2026</td>
+              <td>АЛЬЯНС</td>
+              <td>Semily Gel Active Men</td>
+              <td>SM112030201</td>
+              <td><span class="registry-status rs-signed">Подписана</span></td>
+            </tr>
+            <tr>
+              <td>26.03.2026</td>
+              <td>ИМПЕРИАЛ</td>
+              <td>Semily WrapHot Classic</td>
+              <td>SM920110045</td>
+              <td><span class="registry-status rs-process">На согласовании</span></td>
+            </tr>
+            <tr>
+              <td>25.03.2026</td>
+              <td>ИВА ХОЛДИНГ</td>
+              <td>Масло Репейное 3000мл</td>
+              <td>maslo3000ml</td>
+              <td><span class="registry-status rs-pending">На доставку</span></td>
+            </tr>
+            <tr>
+              <td>24.03.2026</td>
+              <td>ДЖИЭСЭС</td>
+              <td>Сыворотка Моршин 500мл</td>
+              <td>SM138020112</td>
+              <td><span class="registry-status rs-process">На линии</span></td>
+            </tr>
+            <tr>
+              <td>22.03.2026</td>
+              <td>Баккарат</td>
+              <td>Гель для умывания Acne</td>
+              <td>gelymivanie_acne</td>
+              <td><span class="registry-status rs-signed">Подписана</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer style="text-align:center;padding:20px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:8px;">
+  SEMILY | ЗАКУПКИ — Дашборд сформирован 30.03.2026
+</footer>
+
+</body>
+</html>
