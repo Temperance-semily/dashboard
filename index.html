@@ -50,7 +50,7 @@
 <body>
 <header>
   <h1>SEMILY | <span>ЗАКУПКИ</span></h1>
-  <div class="updated">Обновлено: 30.03.2026 11:42</div>
+  <div class="updated">Обновлено: 30.03.2026 11:49 &nbsp;|&nbsp; 📅 Неделя 14</div>
 </header>
 <main>
 
@@ -1022,7 +1022,7 @@
 </main>
 <script>
 (function(){
-  var data = {"overdue_by_producer": {"АЛЬЯНС ООО": 14, "ДЖИЭСЭС КОСМЕТИКС ООО": 2, "ИВА ХОЛДИНГ ООО": 2, "БИТЛДЖЕМ ООО": 2, "Баккарат ООО": 1, "МЫЛОВАРЕННАЯ МАНУФАКТУРА КУАФЕР ООО": 1}, "turnover_by_brand": {"PARLI": {"КРИТИЧНО": 2, "РИСК": 1}, "Farres": {"КРИТИЧНО": 8, "РИСК": 2}, "SEMILY": {"КРИТИЧНО": 12, "РИСК": 14}, "SENDO": {"КРИТИЧНО": 0, "РИСК": 1}, "NOKSO": {"КРИТИЧНО": 0, "РИСК": 2}}, "weekly_arrival": [6000, 347500, 234264, 117104, 176565, 237257], "gp_by_producer": {"Косметические технологии ООО": 640588, "АЛЬЯНС ООО": 341000, "ПАРЛИ ООО": 238783, "ИВА ХОЛДИНГ ООО": 205204, "Баккарат ООО": 174900, "КРЛАБ ООО": 152068, "СОВАЖ ООО": 100002, "МЫЛОВАРЕННАЯ МАНУФАКТУРА КУАФЕР ООО": 87502, "Остальные": 346181}, "chart5_labels": ["Косметические технол", "БИТЛДЖЕМ ООО", "ИВА ХОЛДИНГ ООО", "АЛЬЯНС ООО", "КРЛАБ ООО", "ИМПЕРИАЛ ООО ПК", "ПАРЛИ ООО", "Баккарат ООО", "СКИФ ООО"], "chart5_data": [140.0, 95.0, 82.0, 73.0, 62.0, 55.0, 38.0, 33.0, 14.0], "payment_stats": {"Постоплата": 0, "Предоплата": 0, "Другое": 1}, "payment_note": "0 из 1 производителей переведены на постоплату"};
+  var data = {"overdue_by_producer": {"АЛЬЯНС ООО": 14, "ДЖИЭСЭС КОСМЕТИКС ООО": 2, "ИВА ХОЛДИНГ ООО": 2, "БИТЛДЖЕМ ООО": 2, "Баккарат ООО": 1, "МЫЛОВАРЕННАЯ МАНУФАКТУРА КУАФЕР ООО": 1}, "turnover_by_brand": {"PARLI": {"КРИТИЧНО": 2, "РИСК": 1}, "Farres": {"КРИТИЧНО": 8, "РИСК": 2}, "SEMILY": {"КРИТИЧНО": 12, "РИСК": 14}, "SENDO": {"КРИТИЧНО": 0, "РИСК": 1}, "NOKSO": {"КРИТИЧНО": 0, "РИСК": 2}}, "weekly_arrival": [6000, 347500, 234264, 117104, 176565, 237257], "weekly_labels": ["Нед 12", "Нед 13", "Нед 14 ◀", "Нед 15", "Нед 16", "Нед 17"], "gp_by_producer": {"Косметические технологии ООО": 640588, "АЛЬЯНС ООО": 341000, "ПАРЛИ ООО": 238783, "ИВА ХОЛДИНГ ООО": 205204, "Баккарат ООО": 174900, "КРЛАБ ООО": 152068, "СОВАЖ ООО": 100002, "МЫЛОВАРЕННАЯ МАНУФАКТУРА КУАФЕР ООО": 87502, "Остальные": 346181}, "chart5_labels": ["Косметические технол", "БИТЛДЖЕМ ООО", "ИВА ХОЛДИНГ ООО", "АЛЬЯНС ООО", "КРЛАБ ООО", "ИМПЕРИАЛ ООО ПК", "ПАРЛИ ООО", "Баккарат ООО", "СКИФ ООО"], "chart5_data": [140.0, 95.0, 82.0, 73.0, 62.0, 55.0, 38.0, 33.0, 14.0], "payment_stats": {"Постоплата": 0, "Предоплата": 0, "Другое": 1}, "payment_note": "0 из 1 производителей переведены на постоплату"};
 
   // Chart 1: Просрочки по производителям
   var overdueData = data.overdue_by_producer;
@@ -1062,9 +1062,10 @@
 
   // Chart 3: Приход по неделям (из ПланГП)
   var wArr = data.weekly_arrival;
+  var wLabels = data.weekly_labels;
   new Chart(document.getElementById('chartWeekly'),{
     type:'line',
-    data:{labels:['−2 нед','−1 нед','Эта нед','+1 нед','+2 нед','+3 нед'],datasets:[{
+    data:{labels:wLabels,datasets:[{
       label:'Шт',data:wArr,borderColor:'#6366f1',backgroundColor:'rgba(99,102,241,0.15)',fill:true,tension:0.4,pointBackgroundColor:'#6366f1'
     }]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},title:{display:true,text:'📦 Приход по неделям, шт (план)',color:'#a5b4fc',font:{size:13}}},scales:{x:{ticks:{color:'#94a3b8'},grid:{color:'#2d3149'}},y:{ticks:{color:'#94a3b8'},grid:{color:'#2d3149'}}}}
@@ -1089,10 +1090,19 @@
   var c5labels = data.chart5_labels;
   var c5data = data.chart5_data;
   if(c5labels.length>0){
+    var maxVal = Math.max.apply(null,c5data);
     new Chart(document.getElementById('chartProducerOverdue'),{
       type:'bar',
-      data:{labels:c5labels,datasets:[{label:'Ср. просрочка, дней',data:c5data,backgroundColor:'#f43f5e',borderRadius:4}]},
-      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},title:{display:true,text:'⏱ Средняя просрочка по производителям, дней',color:'#a5b4fc',font:{size:13}}},scales:{x:{ticks:{color:'#94a3b8'},grid:{color:'#2d3149'}},y:{ticks:{color:'#94a3b8'},grid:{color:'#2d3149'}}}}
+      data:{labels:c5labels,datasets:[{label:'Ср. просрочка, дней',data:c5data,
+        backgroundColor:c5data.map(function(v){return v>100?'#ef4444':v>60?'#f97316':'#f59e0b';}),
+        borderRadius:4}]},
+      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{display:false},title:{display:true,text:'⏱ Средняя просрочка по производителям, дней',color:'#a5b4fc',font:{size:13}},
+          datalabels:{display:false}},
+        scales:{
+          x:{ticks:{color:'#94a3b8'},grid:{color:'#2d3149'},max:Math.min(maxVal*1.15,200)},
+          y:{ticks:{color:'#e2e8f0',font:{size:11}},grid:{color:'#2d3149'}}
+        }}
     });
   }
 
