@@ -49,9 +49,19 @@
 </style>
 </head>
 <body>
+<div id="pinGate" style="position:fixed;inset:0;background:#0b1020;display:flex;align-items:center;justify-content:center;z-index:9999;padding:16px;">
+  <div style="width:100%;max-width:380px;background:#1a1d27;border:1px solid #2d3149;border-radius:16px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.35)">
+    <div style="font-size:22px;font-weight:700;color:#fff;margin-bottom:8px">SEMILY | ЗАКУПКИ</div>
+    <div style="font-size:14px;color:#94a3b8;margin-bottom:18px">Введите пин-код для входа в дашборд</div>
+    <input id="pinInput" type="password" inputmode="numeric" placeholder="Пин-код" style="width:100%;padding:12px 14px;border-radius:10px;border:1px solid #2d3149;background:#0f1117;color:#fff;font-size:18px;outline:none;margin-bottom:12px" />
+    <button id="pinBtn" style="width:100%;padding:12px 14px;border-radius:10px;border:none;background:#6366f1;color:#fff;font-size:15px;font-weight:600;cursor:pointer">Открыть дашборд</button>
+    <div id="pinError" style="display:none;color:#f87171;font-size:13px;margin-top:10px">Неверный пин-код</div>
+  </div>
+</div>
+<div id="dashboardContent" style="display:none;">
 <header>
   <h1>SEMILY | <span>ЗАКУПКИ</span></h1>
-  <div class="updated">Обновлено: 06.04.2026 14:14 &nbsp;|&nbsp; 📅 Неделя 15</div>
+  <div class="updated">Обновлено: 06.04.2026 14:25 &nbsp;|&nbsp; 📅 Неделя 15</div>
 </header>
 <main>
 
@@ -2369,8 +2379,41 @@
       </div>
     </div>
 </main>
+</div>
 <script>
 (function(){
+  var REQUIRED_PIN = '1770';
+  var STORAGE_KEY = 'semily_dashboard_pin_ok';
+  var gate = document.getElementById('pinGate');
+  var content = document.getElementById('dashboardContent');
+  var input = document.getElementById('pinInput');
+  var btn = document.getElementById('pinBtn');
+  var err = document.getElementById('pinError');
+
+  function unlock() {
+    gate.style.display = 'none';
+    content.style.display = 'block';
+  }
+
+  function checkPin() {
+    if ((input.value || '').trim() === REQUIRED_PIN) {
+      sessionStorage.setItem(STORAGE_KEY, '1');
+      unlock();
+    } else {
+      err.style.display = 'block';
+      input.select();
+    }
+  }
+
+  if (sessionStorage.getItem(STORAGE_KEY) === '1') {
+    unlock();
+  }
+
+  btn.addEventListener('click', checkPin);
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkPin();
+  });
+
   var data = {"overdue_by_producer": {"АЛЬЯНС ООО": 1, "СКИФ ООО": 1}, "turnover_by_brand": {"PARLI": {"КРИТИЧНО": 2, "РИСК": 3}, "SEMILY": {"КРИТИЧНО": 17, "РИСК": 17}, "Farres": {"КРИТИЧНО": 6, "РИСК": 2}, "SENDO": {"КРИТИЧНО": 1, "РИСК": 0}, "NOKSO": {"КРИТИЧНО": 0, "РИСК": 2}, "Уточнить в сведениях о товаре": {"КРИТИЧНО": 0, "РИСК": 2}}, "weekly_arrival": [215902, 67172, 222195, 314656, 290674, 308108], "weekly_labels": ["Нед 13", "Нед 14", "Нед 15 ◀", "Нед 16", "Нед 17", "Нед 18"], "gp_by_producer": {"ПАРЛИ ООО": 555787, "Китай": 247735, "АЛЬЯНС ООО": 190885, "Баккарат ООО": 184671, "СОВАЖ ООО": 167502, "Косметические технологии ООО": 167053, "ИВА ХОЛДИНГ ООО": 161806, "КРЛАБ ООО": 147583, "Остальные": 520729}, "chart5_labels": ["Косметические технол", "БИТЛДЖЕМ ООО", "АЛЬЯНС ООО", "КРЛАБ ООО", "ИМПЕРИАЛ ООО ПК", "ИВА ХОЛДИНГ ООО", "ПАРЛИ ООО", "СКИФ ООО", "Баккарат ООО"], "chart5_data": [126.0, 99.0, 67.0, 66.0, 59.0, 59.0, 36.0, 18.0, 7.0], "payment_stats": {"Постоплата": 5, "Смешанная": 8, "Предоплата": 4}, "payment_note": "5 из 17 производителей на постоплате · 8 на смешанных условиях · 4 на предоплате"};
 
   // Chart 1: Просрочки по производителям
